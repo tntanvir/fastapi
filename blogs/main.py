@@ -8,9 +8,18 @@ from .database import engine,Base,SessionLocal
 from sqlalchemy.orm import Session
 from .token import create_access_token
 from blogs import oauth2
+from fastapi.middleware.cors import CORSMiddleware
 
 
 apps= FastAPI()
+
+apps.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or specify your frontend URL here, e.g. ["http://localhost:3000"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 model.Base.metadata.create_all(bind=engine)
 
